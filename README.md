@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 圣经祷告词 (Bible Prayer App)
 
-## Getting Started
+AI 驱动的个性化祷告词生成应用
 
-First, run the development server:
+## 功能
+
+- 🏠 **首页** - 每日祷告词 + 每日圣经段落
+- 🙏 **祷告生成** - 根据心情生成个性化祷告词
+- 📖 **历史记录** - 查看/管理祷告历史
+- ⚙️ **设置** - 提醒时间、深色模式
+
+## 快速部署到 Vercel
+
+### 方法1: 一键部署 (推荐)
+
+点击下方按钮自动部署：
+
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Sylvie-xinya/bible-prayer-app)
+
+### 方法2: 本地部署
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 克隆项目
+git clone https://github.com/Sylvie-xinya/bible-prayer-app.git
+cd bible-prayer-app
+
+# 安装依赖
+npm install
+
+# 部署到 Vercel
+npx vercel --prod
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 技术栈
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Next.js 16
+- TypeScript
+- Tailwind CSS
+- localStorage (本地存储)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 开发
 
-## Learn More
+```bash
+# 本地开发
+npm run dev
 
-To learn more about Next.js, take a look at the following resources:
+# 构建
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 许可证
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
