@@ -7,8 +7,8 @@ import NavBar from "./NavBar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Bible Prayer | 圣经祷告词",
-  description: "AI-powered personalized prayer generator | AI 驱动的个性化祷告词生成应用",
+  title: "Bible Prayer",
+  description: "AI-powered personalized prayer generator",
 };
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
+    <html lang="en">
       <body className={inter.className}>
         <LanguageProvider>
           <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50">
