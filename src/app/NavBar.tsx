@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Home, Heart, Clock, Settings } from "lucide-react";
+import { Home, Heart, Clock, Settings, Tag } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function NavBar() {
@@ -24,6 +24,10 @@ export default function NavBar() {
         <Link href="/settings" className="flex flex-col items-center gap-1 text-stone-400 hover:text-amber-700 transition-colors">
           <Settings size={22} strokeWidth={1.5} />
           <span className="text-xs">{t("nav.settings")}</span>
+        </Link>
+        <Link href="/pricing" className="flex flex-col items-center gap-1 text-stone-400 hover:text-amber-700 transition-colors">
+          <Tag size={22} strokeWidth={1.5} />
+          <span className="text-xs">{t("nav.pricing")}</span>
         </Link>
       </div>
     </nav>

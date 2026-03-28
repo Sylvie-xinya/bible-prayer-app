@@ -5,6 +5,7 @@ export const translations = {
     prayer: { zh: "祷告", en: "Prayer" },
     history: { zh: "记录", en: "History" },
     settings: { zh: "设置", en: "Settings" },
+    pricing: { zh: "定价", en: "Pricing" },
   },
 
   // 首页
@@ -75,6 +76,27 @@ export const translations = {
   languages: {
     zh: { zh: "中文", en: "Chinese" },
     en: { zh: "英文", en: "English" },
+  },
+
+  // 定价页
+  pricing: {
+    title: { zh: "定价", en: "Pricing" },
+    subtitle: { zh: "选择适合你的方案", en: "Choose the plan that works for you" },
+    free: { zh: "免费", en: "Free" },
+    pro: { zh: "专业版", en: "Pro" },
+    proPlus: { zh: "高级版", en: "Pro+" },
+    perMonth: { zh: "/月", en: "/month" },
+    currentPlan: { zh: "当前方案", en: "Current Plan" },
+    upgrade: { zh: "立即升级", en: "Coming Soon" },
+    mostPopular: { zh: "最受欢迎", en: "Most Popular" },
+    features: {
+      dailyPrayer: { zh: "每日1次AI祷告", en: "1 AI prayer per day" },
+      dailyBible: { zh: "每日圣经金句", en: "Daily Bible verse" },
+      savePrayers: { zh: "保存祷告记录", en: "Save prayers" },
+      unlimitedPrayers: { zh: "无限次AI祷告", en: "Unlimited AI prayers" },
+      noAds: { zh: "无广告", en: "Ad-free experience" },
+      advancedBible: { zh: "高级圣经经文", en: "Advanced Bible passages" },
+    },
   },
 };
 
