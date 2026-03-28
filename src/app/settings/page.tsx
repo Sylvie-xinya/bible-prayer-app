@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Bell, Clock, Moon, Sun, ArrowLeft, Check } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { Bell, Clock, Moon, Sun, ArrowLeft, Check, Globe } from "lucide-react";
 
 export default function SettingsPage() {
+  const { language, setLanguage, t } = useLanguage();
   const [reminderEnabled, setReminderEnabled] = useState(false);
   const [reminderTime, setReminderTime] = useState("20:00");
   const [darkMode, setDarkMode] = useState(false);
@@ -29,13 +31,17 @@ export default function SettingsPage() {
         darkMode,
       })
     );
-    setIsSaved(true);
-    setTimeout(() => setIsSaved(false), 1500);
   };
 
   const toggleSetting = (setter: (v: boolean) => void, value: boolean) => {
     setter(value);
     setTimeout(saveSettings, 100);
+  };
+
+  const handleLanguageChange = (lang: "zh" | "en") => {
+    setLanguage(lang);
+    setIsSaved(true);
+    setTimeout(() => setIsSaved(false), 1500);
   };
 
   return (
@@ -44,13 +50,48 @@ export default function SettingsPage() {
         {/* 返回按钮 */}
         <Link href="/" className="inline-flex items-center gap-2 text-stone-500 hover:text-amber-600">
           <ArrowLeft size={18} />
-          <span>返回首页</span>
+          <span>{t("settings.back")}</span>
         </Link>
 
         {/* 标题 */}
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-amber-800">⚙️ 设置</h1>
-          <p className="text-stone-500 text-sm mt-1">自定义你的使用体验</p>
+          <h1 className="text-2xl font-bold text-amber-800">{t("settings.title")}</h1>
+          <p className="text-stone-500 text-sm mt-1">{t("settings.subtitle")}</p>
+        </div>
+
+        {/* 语言设置 */}
+        <div className="bg-white rounded-2xl p-5 shadow-sm border border-amber-100 space-y-4">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="bg-amber-100 p-2 rounded-lg">
+              <Globe size={20} className="text-amber-600" />
+            </div>
+            <div>
+              <p className="font-medium text-stone-700">{t("settings.language")}</p>
+              <p className="text-stone-400 text-sm">{t("settings.languageDesc")}</p>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <button
+              onClick={() => handleLanguageChange("zh")}
+              className={`flex-1 py-3 rounded-xl font-medium transition-all ${
+                language === "zh"
+                  ? "bg-amber-500 text-white"
+                  : "bg-stone-100 text-stone-600 hover:bg-stone-200"
+              }`}
+            >
+              🇨🇳 中文
+            </button>
+            <button
+              onClick={() => handleLanguageChange("en")}
+              className={`flex-1 py-3 rounded-xl font-medium transition-all ${
+                language === "en"
+                  ? "bg-amber-500 text-white"
+                  : "bg-stone-100 text-stone-600 hover:bg-stone-200"
+              }`}
+            >
+              🇺🇸 English
+            </button>
+          </div>
         </div>
 
         {/* 提醒设置 */}
@@ -61,8 +102,8 @@ export default function SettingsPage() {
                 <Bell size={20} className="text-amber-600" />
               </div>
               <div>
-                <p className="font-medium text-stone-700">每日提醒</p>
-                <p className="text-stone-400 text-sm">定时提醒你祷告</p>
+                <p className="font-medium text-stone-700">{t("settings.reminder")}</p>
+                <p className="text-stone-400 text-sm">{t("settings.reminderDesc")}</p>
               </div>
             </div>
             <button
@@ -82,7 +123,7 @@ export default function SettingsPage() {
           {reminderEnabled && (
             <div className="flex items-center gap-3 pt-3 border-t border-stone-100">
               <Clock size={18} className="text-stone-400" />
-              <span className="text-stone-600">提醒时间</span>
+              <span className="text-stone-600">{t("settings.reminderTime")}</span>
               <input
                 type="time"
                 value={reminderTime}
@@ -104,8 +145,8 @@ export default function SettingsPage() {
                 {darkMode ? <Moon size={20} className="text-amber-600" /> : <Sun size={20} className="text-amber-600" />}
               </div>
               <div>
-                <p className="font-medium text-stone-700">深色模式</p>
-                <p className="text-stone-400 text-sm">切换深色/浅色主题</p>
+                <p className="font-medium text-stone-700">{t("settings.darkMode")}</p>
+                <p className="text-stone-400 text-sm">{t("settings.darkModeDesc")}</p>
               </div>
             </div>
             <button
@@ -126,9 +167,9 @@ export default function SettingsPage() {
         {/* 关于 */}
         <div className="bg-white rounded-2xl p-5 shadow-sm border border-amber-100">
           <p className="text-stone-500 text-sm text-center">
-            圣经祷告词 v1.0.0
+            Bible Prayer v1.0.0
             <br />
-            愿祢的旨意成就
+            {t("settings.version")}
           </p>
         </div>
 
@@ -136,7 +177,7 @@ export default function SettingsPage() {
         {isSaved && (
           <div className="fixed top-4 left-1/2 -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2 animate-in fade-in">
             <Check size={16} />
-            <span>设置已保存</span>
+            <span>{t("settings.saved")}</span>
           </div>
         )}
       </div>

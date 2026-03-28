@@ -1,26 +1,30 @@
+"use client";
+
+import { useLanguage } from "@/i18n/LanguageContext";
 import { getDailyPrayer } from "@/data/dailyPrayers";
 import { getDailyPassage } from "@/data/biblePassages";
 import Link from "next/link";
 import { Sparkles, Heart, ArrowRight, BookOpen } from "lucide-react";
 
 export default function Home() {
-  const dailyPrayer = getDailyPrayer();
-  const dailyPassage = getDailyPassage();
+  const { language, t } = useLanguage();
+  const dailyPrayer = getDailyPrayer(language);
+  const dailyPassage = getDailyPassage(language);
 
   return (
     <div className="min-h-screen px-6 py-8">
       <div className="max-w-md mx-auto space-y-6">
         {/* 标题 */}
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold text-amber-800">🏠 圣经祷告词</h1>
-          <p className="text-stone-500">每天一句，让祷告更亲近</p>
+          <h1 className="text-3xl font-bold text-amber-800">{t("home.title")}</h1>
+          <p className="text-stone-500">{t("home.subtitle")}</p>
         </div>
 
         {/* 今日祷告词卡片 */}
         <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 shadow-lg border border-amber-100">
           <div className="flex items-center gap-2 text-amber-600 mb-4">
             <Heart size={18} fill="currentColor" />
-            <span className="text-sm font-medium">今日祷告词</span>
+            <span className="text-sm font-medium">{t("home.dailyPrayer")}</span>
           </div>
           <p className="text-stone-700 leading-relaxed whitespace-pre-wrap">
             {dailyPrayer}
@@ -31,7 +35,7 @@ export default function Home() {
         <div className="bg-white rounded-2xl p-6 shadow-lg border border-amber-100">
           <div className="flex items-center gap-2 text-amber-600 mb-4">
             <BookOpen size={18} />
-            <span className="text-sm font-medium">今日圣经</span>
+            <span className="text-sm font-medium">{t("home.dailyBible")}</span>
           </div>
           <p className="text-xl text-stone-800 font-serif leading-relaxed mb-4">
             "{dailyPassage.content}"
@@ -50,8 +54,8 @@ export default function Home() {
                 <Sparkles size={28} />
               </div>
               <div>
-                <h2 className="text-xl font-bold">AI 祷告生成</h2>
-                <p className="text-white/80 text-sm">输入你的心情，AI 为你代祷</p>
+                <h2 className="text-xl font-bold">{t("home.generateBtn")}</h2>
+                <p className="text-white/80 text-sm">{t("home.generateDesc")}</p>
               </div>
             </div>
             <ArrowRight size={24} />
@@ -64,13 +68,13 @@ export default function Home() {
             href="/history"
             className="bg-white p-4 rounded-xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow text-center"
           >
-            <p className="text-stone-700 font-medium">📖 查看祷告记录</p>
+            <p className="text-stone-700 font-medium">📖 {t("home.prayerRecords")}</p>
           </Link>
           <Link
             href="/settings"
             className="bg-white p-4 rounded-xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow text-center"
           >
-            <p className="text-stone-700 font-medium">⚙️ 应用设置</p>
+            <p className="text-stone-700 font-medium">⚙️ {t("home.appSettings")}</p>
           </Link>
         </div>
       </div>

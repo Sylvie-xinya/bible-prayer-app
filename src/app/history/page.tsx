@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useLanguage } from "@/i18n/LanguageContext";
 import { Trash2, Heart, Calendar, ArrowLeft } from "lucide-react";
+import { moodEmojis } from "@/data/prayers";
 
 interface Prayer {
   id: string;
@@ -11,18 +13,8 @@ interface Prayer {
   createdAt: string;
 }
 
-const moodEmojis: Record<string, string> = {
-  "感恩": "😊",
-  "忧伤": "😢",
-  "愤怒": "😤",
-  "焦虑": "😰",
-  "困惑": "🤔",
-  "疲惫": "😴",
-  "平安": "😌",
-  "刚强": "💪",
-};
-
 export default function HistoryPage() {
+  const { language, t } = useLanguage();
   const [prayers, setPrayers] = useState<Prayer[]>([]);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
@@ -43,7 +35,7 @@ export default function HistoryPage() {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString("zh-CN", {
+    return date.toLocaleDateString(language === "zh" ? "zh-CN" : "en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -52,28 +44,30 @@ export default function HistoryPage() {
     });
   };
 
+  const emojis = moodEmojis[language];
+
   return (
     <div className="min-h-screen px-6 py-8">
       <div className="max-w-md mx-auto space-y-6">
         {/* 返回按钮 */}
         <Link href="/" className="inline-flex items-center gap-2 text-stone-500 hover:text-amber-600">
           <ArrowLeft size={18} />
-          <span>返回首页</span>
+          <span>{t("history.back")}</span>
         </Link>
 
         {/* 标题 */}
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-amber-800">📖 祷告记录</h1>
-          <p className="text-stone-500 text-sm mt-1">你的祷告历程</p>
+          <h1 className="text-2xl font-bold text-amber-800">{t("history.title")}</h1>
+          <p className="text-stone-500 text-sm mt-1">{t("history.subtitle")}</p>
         </div>
 
         {/* 记录列表 */}
         {prayers.length === 0 ? (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">📝</div>
-            <p className="text-stone-400">还没有祷告记录</p>
+            <p className="text-stone-400">{t("history.empty")}</p>
             <Link href="/prayer" className="text-amber-600 hover:underline mt-2 inline-block">
-              开始你的第一个祷告
+              {t("history.startPrayer")}
             </Link>
           </div>
         ) : (
@@ -88,7 +82,7 @@ export default function HistoryPage() {
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xl">{moodEmojis[prayer.mood] || "🙏"}</span>
+                      <span className="text-xl">{emojis[prayer.mood as keyof typeof emojis] || "🙏"}</span>
                       <span className="text-stone-600 font-medium">{prayer.mood}</span>
                     </div>
                     <p className="text-stone-700 leading-relaxed line-clamp-3">{prayer.content}</p>
